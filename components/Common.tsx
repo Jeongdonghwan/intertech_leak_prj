@@ -1,6 +1,6 @@
 // 공통 UI — 이모지 없이 선 아이콘, 각진(2px) 버튼, 지점 2곳 연락처.
 import Link from 'next/link';
-import { BRAND, BRANCH_LIST, HOURS, Branch, telOf } from '../lib/site';
+import { BRAND, BRANCH_LIST, HOURS, Branch, PHONE, tel } from '../lib/site';
 
 export const JsonLd = ({ data }: { data: object | object[] }) => (
   <>{(Array.isArray(data) ? data : [data]).map((d, i) => <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(d).replace(/</g, '\\u003c') }} />)}</>
@@ -23,10 +23,10 @@ export const Glyph = ({ size = 34 }: { size?: number }) => (
 );
 
 // 주 행동 — 지점명 + 번호를 버튼 글자로
-export const Call = ({ b, dark = false }: { b: Branch; dark?: boolean }) => (
-  <a className={dark ? 'call call-line' : 'call'} href={telOf(b)} aria-label={`${BRAND} ${b.name} 전화 ${b.phone}`}>
-    <small>{b.name}</small>
-    <span><IconPhone />{b.phone}</span>
+export const Call = ({ dark = false }: { b?: Branch; dark?: boolean }) => (
+  <a className={dark ? 'call call-line' : 'call'} href={tel} aria-label={`${BRAND} 대표번호 ${PHONE}`}>
+    <small>대표번호 · 24시간</small>
+    <span><IconPhone />{PHONE}</span>
   </a>
 );
 
@@ -51,9 +51,9 @@ export const BranchPair = ({ focus }: { focus?: Branch }) => {
             <div><dt>담당</dt><dd>{b.area}</dd></div>
             <div><dt>접수</dt><dd>전화 · 방문접수/출장 · 예약</dd></div>
           </dl>
-          <Call b={b} dark={!!focus && focus.key !== b.key} />
         </article>
       ))}
+      <div className="pair-call"><span>두 지점 공통 대표번호</span><Call /></div>
     </div>
   );
 };
@@ -63,7 +63,7 @@ export const Header = () => (
     <div className="topline">
       <div className="wrap topline-in">
         <span className="hide-m">누수탐지 · 누수공사 · 하수도·변기 뚫음 — {HOURS}</span>
-        <span className="topline-tel">{BRANCH_LIST.map((b) => <a key={b.key} href={telOf(b)}>{b.name} <b>{b.phone}</b></a>)}</span>
+        <span className="topline-tel"><a href={tel}>대표번호 <b>{PHONE}</b></a></span>
       </div>
     </div>
     <div className="wrap header-inner">
@@ -87,13 +87,13 @@ export const Footer = () => (
       <div>
         <strong className="foot-brand"><Glyph size={26} />{BRAND}</strong>
         <p>누수탐지 · 누수공사 · 층간 · 벽간 · 화장실 · 바닥 · 공용배관 · 노후배관 · 보일러 누수<br />하수도 · 변기 뚫음 등 설비 · {HOURS}</p>
+        <p>대표번호 <a href={tel}>{PHONE}</a></p>
         <p><Link href="/area/">지역 안내</Link> · <Link href="/blog/">누수 노트</Link> · <a href="/rss.xml">RSS</a></p>
       </div>
       {BRANCH_LIST.map((b) => (
         <ul key={b.key} className="foot-info">
           <li className="foot-head">{b.name}</li>
           <li>{b.addr}</li>
-          <li><a href={telOf(b)}>{b.phone}</a></li>
           <li><a href={b.place} target="_blank" rel="noopener noreferrer">네이버 플레이스</a></li>
         </ul>
       ))}
@@ -104,6 +104,6 @@ export const Footer = () => (
 
 export const StickyBar = () => (
   <div className="sticky-bar">
-    {BRANCH_LIST.map((b) => <a key={b.key} href={telOf(b)}><IconPhone /><span>{b.name}<b>{b.phone}</b></span></a>)}
+    <a href={tel}><IconPhone /><span>대표번호 · 24시간<b>{PHONE}</b></span></a>
   </div>
 );

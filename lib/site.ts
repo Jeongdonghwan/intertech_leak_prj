@@ -1,7 +1,8 @@
 // 사이트 설정 — 연락처·도메인은 이 파일만 고치면 전 페이지에 반영된다.
 // 근거: 네이버 플레이스 2곳 수집본(source/place_1855187116.json 분당점, source/place_1046750151.json 용인점, 2026-11-12).
 //   플레이스 상호는 '누수'로 등록돼 있고 대표키워드·소개글에 '인터테크누수'·'인터테크' — 브랜드는 인터테크누수.
-//   전화는 플레이스 0507 안심번호만 확인됨(사용자 지시로 0507 사용). 업체 사진 속 010 번호는 SITE.md '확인 필요'.
+//   전화: 두 지점 플레이스 썸네일 이미지에 공통으로 적힌 010-3292-1914 를 대표번호로 쓴다(사용자 규칙: 010·대표번호 우선).
+//   플레이스 0507 안심번호(분당점 0507-1447-1915, 용인점 0507-1387-7233)는 쓰지 않는다.
 
 export const SITE_URL = process.env.SITE_URL || 'http://127.0.0.1:18992'; // TODO 도메인 확정 후 교체
 export const BRAND = '인터테크누수';
@@ -12,16 +13,18 @@ export interface Branch {
   key: BranchKey; name: string; phone: string; addr: string; jibun: string; region: string; locality: string;
   area: string; intro: string; lat: string; lng: string; place: string;
 }
+export const PHONE = '010-3292-1914'; // 대표번호 — 모든 전화 버튼·헤더·JSON-LD
+export const tel = `tel:${PHONE.replace(/[^0-9]/g, '')}`;
 export const BRANCHES: Record<BranchKey, Branch> = {
   bundang: {
-    key: 'bundang', name: '분당점', phone: '0507-1447-1915',
+    key: 'bundang', name: '분당점', phone: PHONE,
     addr: '경기 성남시 분당구 서현로210번길 14 지하3층 b301호', jibun: '서현동 248-3', region: '경기도', locality: '성남시 분당구',
     area: '분당 · 판교 · 수지 · 죽전 · 용인 · 성남', // 플레이스 소개 원문
     intro: '분당전지역 누수탐지 공사전문 업체입니다. 30년 노하우를 만나보세요. 하수도, 변기뚫음 등 설비관련 모든 서비스를 제공합니다.',
     lat: '37.3862377', lng: '127.1245931', place: 'https://m.place.naver.com/place/1855187116/home',
   },
   yongin: {
-    key: 'yongin', name: '용인점', phone: '0507-1387-7233',
+    key: 'yongin', name: '용인점', phone: PHONE,
     addr: '경기 용인시 기흥구 언동로217번길 31', jibun: '중동 1139', region: '경기도', locality: '용인시 기흥구',
     area: '용인시 전지역', // 플레이스 소개 원문
     intro: '30년 노하우! 용인시 전지역 누수 전문! 아파트, 상가, 빌라, 주택, 야외 등 / 층간, 벽간, 화장실, 바닥, 공용배관, 노후배관, 보일러 등',

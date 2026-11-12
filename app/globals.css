@@ -115,6 +115,8 @@ p { margin: 0 0 1em; }
 .pair dl div { display: grid; grid-template-columns: 54px 1fr; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--line); }
 .pair dt { font-family: var(--mono); font-size: .76rem; color: var(--muted); padding-top: 3px; }
 .pair dd { margin: 0; font-weight: 500; }
+.pair-call { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; padding: 22px 32px; border-top: 1px solid var(--line); }
+.pair-call > span { font-weight: 700; }
 
 /* ---- 진단 경로 ---- */
 .path { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 26px; position: relative; }
@@ -301,6 +303,7 @@ p { margin: 0 0 1em; }
   .pair { grid-template-columns: 1fr; }
   .pair-col { padding: 24px 20px; }
   .pair-col + .pair-col { border-left: 0; border-top: 1px solid var(--line); }
+  .pair-call { padding: 20px; }
   .path { grid-template-columns: 1fr; gap: 30px; }
   .bldg { grid-template-columns: 1fr; }
   .bldg li { padding: 20px 0; }
@@ -313,7 +316,7 @@ p { margin: 0 0 1em; }
   .answer { padding: 20px 18px; margin-top: -20px; }
   .notes a { grid-template-columns: 1fr; gap: 2px; }
   .shots { grid-template-columns: 1fr 1fr; }
-  .sticky-bar { display: grid; grid-template-columns: 1fr 1fr; position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; background: var(--slate); border-top: 3px solid var(--teal); transform: translateY(100%); transition: transform .4s var(--ease); }
+  .sticky-bar { display: grid; grid-template-columns: 1fr; position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; background: var(--slate); border-top: 3px solid var(--teal); transform: translateY(100%); transition: transform .4s var(--ease); }
   .scrolled .sticky-bar { transform: none; }
   .sticky-bar a { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 6px; color: #fff; text-decoration: none; font-size: .78rem; }
   .sticky-bar a + a { border-left: 1px solid rgba(255,255,255,.18); }

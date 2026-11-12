@@ -13,8 +13,9 @@ OUT = ROOT / 'public' / 'og'
 W, H = 1200, 630
 SAFE_L, SAFE_W = 300, 600  # 가운데 정사각형(285~915) 안쪽
 BRAND = '인터테크누수'
-PHONES = {'bundang': '분당점 0507-1447-1915', 'yongin': '용인점 0507-1387-7233'}  # lib/site.ts 와 맞출 것
-BOTH = '분당 0507-1447-1915 · 용인 0507-1387-7233'
+PHONE = '대표번호 010-3292-1914'  # lib/site.ts PHONE 과 맞출 것
+PHONES = {'bundang': f'분당점 담당 · {PHONE}', 'yongin': f'용인점 담당 · {PHONE}'}
+BOTH = f'분당점 · 용인점 · {PHONE}'
 NAVY, ACCENT = (29, 42, 54), (78, 196, 206)  # 남회색 바탕 · 청록 글자
 # 윈도우는 맑은 고딕, 리눅스(예약 작업)는 Noto CJK — fonts-noto-cjk 패키지
 _FONTS = [(r'C:\Windows\Fonts\malgunbd.ttf', r'C:\Windows\Fonts\malgun.ttf'),

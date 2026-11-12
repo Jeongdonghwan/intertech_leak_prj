@@ -12,7 +12,8 @@
 | `/blog/`, `/blog/<슬러그>/` | 누수 노트 45편 — **date 비어 있어 비공개**. 오픈일 정하면 `python -I scripts/drip/schedule_posts.py <YYYY-MM-DD>` (하루 1·2편 번갈아 30일, 큐 done 처리) |
 | `/sitemap.xml`, `/robots.txt`, `/rss.xml` | 열린 묶음 + 공개된 글만 |
 
-담당 지점(전화): 분당구(성남) 페이지 = 분당점 0507-1447-1915 / 용인시·처인·기흥·수지 페이지 = 용인점 0507-1387-7233 / 홈·허브·블로그 = 두 지점 모두. `data/places.json` gus.*.branch.
+전화: 모든 페이지·헤더·하단 바·JSON-LD telephone·og = 대표번호 **010-3292-1914** 하나(`lib/site.ts` PHONE). 근거: 두 지점 플레이스 썸네일 이미지에 공통으로 적힌 번호, 사용자 규칙(010·대표번호 우선, 0507 은 다른 번호 없을 때만). 플레이스 0507(분당점 0507-1447-1915, 용인점 0507-1387-7233)은 쓰지 않음.
+담당 지점(방문·안내): 분당구(성남) 페이지 = 분당점 / 용인시·처인·기흥·수지 페이지 = 용인점 / 홈·허브·블로그 = 두 지점 나란히(주소·담당 지역만, 번호는 대표번호 하나). `data/places.json` gus.*.branch.
 
 ## 키워드·오픈 묶음
 원본 `keywords/인터테크누수_키워드.xlsx`(region_kw_prj 복사본, 3,906행). `scripts/build_pages.py` 가 **'생성 대상' = O** 행만 페이지로 만든다(지금 1,000). 순서 = 우선순위 → 순번.
@@ -22,7 +23,7 @@
 ```bash
 python -I scripts/build_pages.py     # 엑셀 → data/site-pages.json + keywords/인터테크누수_키워드_페이지.xlsx
 python -I scripts/prepare_images.py  # source/raw → public/img/p1~p6 (.webp + og용 .jpg)
-python -I scripts/make_og.py         # public/og (없는 것만, --force 전부) — 키워드 og 에 담당 지점 번호
+python -I scripts/make_og.py         # public/og (없는 것만, --force 전부) — 키워드 og 에 담당 지점 + 대표번호
 OPEN_WAVE=4 SITE_URL=https://도메인 npx next build
 bash scripts/deploy.sh <묶음> <https://도메인>   # git remote(origin) 필요 — 아직 없음
 python -I scripts/drip/drip_status.py data/drip.json  # launch null → WAVE=0 POST=0
@@ -44,8 +45,8 @@ python -I scripts/drip/drip_status.py data/drip.json  # launch null → WAVE=0 P
 
 ## 디자인 (병원·클리닉 톤, 새 템플릿)
 토큰: 흰 #fff · 연회색 #f1f4f7 · 연청록 #e6f3f4 · 남회색 #1d2a36 · 글자 #16212b · 청록 강조 #0e7c86 1색. 모서리 0~2px.
-- 헤더: 남회색 상단 줄(두 지점 번호) + 흰 메뉴줄, 로고 = 청록 사각 + 물방울·눈금 글리프(파비콘 동일)
-- 버튼: 지점명(작게) + 번호(크게) 2줄 슬랩, 아래에서 차오르는 와이프. 보조는 외곽선 슬랩
+- 헤더: 남회색 상단 줄(대표번호) + 흰 메뉴줄, 로고 = 청록 사각 + 물방울·눈금 글리프(파비콘 동일)
+- 버튼: '대표번호 · 24시간'(작게) + 번호(크게) 2줄 슬랩, 아래에서 차오르는 와이프. 보조는 외곽선 슬랩
 - 히어로: 왼쪽 제목 2줄(둘째 줄 청록)·전화, 오른쪽 등록 사진 + 겹친 '진단 기록' 패널(탐지/원인/공사/확인 또는 접수 요약 dl). 모바일은 사진·패널이 먼저
 - 지점 블록: 두 지점 나란히 dl(주소·운영·담당·접수) + 번호, 키워드 페이지는 담당 지점을 앞에·청록 윗선
 - 진단 경로: 사각 표식(글자) + 그려지는 진행선, 단계별 사진
@@ -54,7 +55,7 @@ python -I scripts/drip/drip_status.py data/drip.json  # launch null → WAVE=0 P
 - 다른 동시 작업 사이트(비계 그라파이트+노랑, 스카이 검정+주황, 호이스트 회색+도면)와 색·구성이 겹치지 않음
 
 ## 확인 필요
-- [ ] **010 번호**: 두 지점 플레이스 썸네일 이미지(_01)에 `010-3292-1914` 가 적혀 있음. 대표 번호라면 사용자 규칙(010 우선)상 교체 대상 — 지금은 지시대로 0507 사용
+- [x] 대표번호 010-3292-1914 적용(2026-11-12). 썸네일 이미지(_01)는 광고 이미지라 사이트 사진으로는 계속 제외
 - [ ] 썸네일에 '인터테크설비', '무료출장견적', '욕실리모델링' 문구 — 사이트에는 안 씀(확인되면 반영)
 - [ ] 분당점 주소 '지하3층 b301호'가 실제 사무실인지(플레이스 그대로 표기)
 - [ ] 도메인, 서치어드바이저·서치콘솔 소유확인 코드(`lib/site.ts` NAVER_VERIFY·GOOGLE_VERIFY 비어 있음), 사업자번호·대표자

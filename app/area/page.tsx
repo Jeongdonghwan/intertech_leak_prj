@@ -41,7 +41,7 @@ export default function AreaIndex() {
                   <Link href={guPath(g)}>
                     <h3>{GUS[g].full}<IconArrow /></h3>
                     <p>{GUS[g].note}</p>
-                    <p className="gu-meta">{b.name} {b.phone} · 안내 {guPages(g).length}곳 · {places.slice(0, 8).join(', ')}{places.length > 8 ? ' 외' : ''}</p>
+                    <p className="gu-meta">{b.name} 담당 · 안내 {guPages(g).length}곳 · {places.slice(0, 8).join(', ')}{places.length > 8 ? ' 외' : ''}</p>
                   </Link>
                 </li>
               );

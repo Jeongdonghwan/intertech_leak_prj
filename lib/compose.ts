@@ -4,7 +4,7 @@
 //   '최신장비와 최첨단 컴퓨터를 이용한 누수탐지'(소개 원문), 등록 사진의 가압 시험(압력계·컴프레서)·청음 탐지 장면.
 // 쓰지 않는 것: 가격·건수·리뷰 수·보장 표현(100%·완벽 해결).
 import { Page, Place, Gu, PLACES, GUS, seedOf, photosFor, Photo } from './data';
-import { BRAND, HOURS, BRANCHES, Branch } from './site';
+import { BRAND, HOURS, BRANCHES, Branch, PHONE } from './site';
 import { j } from './ko';
 
 const pick = <T,>(arr: T[], seed: string, salt: string): T => arr[seedOf(`${seed}::${salt}`) % arr.length];
@@ -452,7 +452,7 @@ export function compose(p: Page): Composed {
   if (description.length > 158) description = description.slice(0, 155).replace(/\s\S*$/, '') + '…';
 
   const lead = pick([
-    `${placeName} ${wl} 상담은 ${b.name}(${b.phone})이 받습니다. ${HOURS}로 운영하며, 탐지·원인·공사·확인 순서로 진행합니다.`,
+    `${placeName} ${wl} 상담은 대표번호 ${PHONE}로 받고 ${b.name}이 방문합니다. ${HOURS}로 운영하며, 탐지·원인·공사·확인 순서로 진행합니다.`,
     `${j(wl, '는')} ${w.focus}입니다. ${j(placeName, '은')} ${BRAND} ${b.name} 담당이고 ${HOURS} 전화를 받습니다.`,
     `${placeName}에서 ${j(wl, '을')} 찾는 분께 — ${b.name}이 ${HOURS} 접수하고, 위치를 먼저 확인한 뒤 필요한 곳만 엽니다.`,
   ], s, 'lead');
@@ -516,7 +516,8 @@ export function compose(p: Page): Composed {
 
   const summary: [string, string][] = [
     ['지역', `${G.full}${P.unit === '구' || P.unit === '시·군' ? '' : ' ' + P.name}`],
-    ['담당', `${b.name} ${b.phone}`],
+    ['담당', b.name],
+    ['전화', `대표번호 ${PHONE}`],
     ['운영', HOURS],
     ['진행', '탐지 → 원인 → 공사 → 확인'],
   ];
@@ -524,9 +525,9 @@ export function compose(p: Page): Composed {
   const closing = {
     heading: pick([`${placeName} ${wl}, 젖은 자리와 시점을 알려 주세요`, `${b.name}이 ${placeName} 현장을 봅니다`, `${placeName}에서 물이 샐 때 연락처`], s, 'cl').replace(`${b.name}이`, j(b.name, '이')),
     text: pick([
-      `언제부터 어디가 젖는지, 물을 쓰지 않을 때도 젖는지만 알려 주시면 통화에서 의심 계통을 먼저 좁힙니다. ${b.name} ${b.phone}, ${HOURS}.`,
+      `언제부터 어디가 젖는지, 물을 쓰지 않을 때도 젖는지만 알려 주시면 통화에서 의심 계통을 먼저 좁힙니다. 대표번호 ${PHONE}, ${HOURS}.`,
       `${b.name}은 ${b.addr}에 있습니다. 접수는 ${HOURS}이고, 방문 예약도 됩니다.`,
-      `계량기 사진과 젖은 자리 사진이 있으면 통화가 짧아집니다. ${b.name} ${b.phone}으로 연락 주세요.`,
+      `계량기 사진과 젖은 자리 사진이 있으면 통화가 짧아집니다. 대표번호 ${PHONE}로 연락 주세요.`,
     ], s, 'clt'),
   };
   const cta = pick([

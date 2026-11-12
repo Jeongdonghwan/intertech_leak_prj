@@ -1,4 +1,4 @@
-import { SITE_URL, SITE_NAME, BRAND, BRANCH_LIST, Branch } from './site';
+import { SITE_URL, SITE_NAME, BRAND, BRANCH_LIST, Branch, PHONE } from './site';
 
 const branchLd = (b: Branch) => ({
   '@type': 'Plumber',
@@ -6,7 +6,7 @@ const branchLd = (b: Branch) => ({
   name: `${BRAND} ${b.name}`,
   url: `${SITE_URL}/`,
   image: `${SITE_URL}/img/p1.jpg`,
-  telephone: b.phone,
+  telephone: PHONE,
   address: { '@type': 'PostalAddress', addressCountry: 'KR', addressRegion: b.region, addressLocality: b.locality, streetAddress: b.addr.replace(/^경기 \S+ \S+ /, '') },
   geo: { '@type': 'GeoCoordinates', latitude: b.lat, longitude: b.lng },
   openingHoursSpecification: { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], opens: '00:00', closes: '23:59' },

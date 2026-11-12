@@ -33,7 +33,7 @@ const BUILDINGS = [
 ];
 
 const FAQ = [
-  { q: '분당점과 용인점 중 어디로 연락하나요?', a: '성남 분당·판교 쪽은 분당점(0507-1447-1915), 용인 처인·기흥·수지는 용인점(0507-1387-7233)이 맡습니다. 두 곳 모두 24시간·연중무휴입니다.' },
+  { q: '분당점과 용인점 중 어디로 연락하나요?', a: '전화는 대표번호 010-3292-1914 하나로 받습니다. 성남 분당·판교 쪽은 분당점, 용인 처인·기흥·수지는 용인점이 방문하며 두 곳 모두 24시간·연중무휴입니다.' },
   { q: '누수탐지 때 바닥을 많이 뜯나요?', a: '탐지는 압력과 소리로 위치를 좁히는 작업이라 바닥을 열지 않습니다. 지점이 정해진 뒤 보수할 자리만 작게 엽니다.' },
   { q: '비용은 얼마인가요?', a: '탐지 범위, 여는 면적, 배관 보수·교체, 바닥 마감, 방수 보강에 따라 달라집니다. 통화로 예상 범위를 설명드리고, 위치를 확인한 뒤 항목별로 안내합니다.' },
   { q: '누수 말고 하수도·변기 막힘도 보나요?', a: '업체 소개에 하수도·변기 뚫음 등 설비 서비스가 함께 적혀 있습니다. 배수가 막혀 넘친 물이 누수처럼 보이는 경우도 있어 같이 확인합니다.' },
@@ -57,7 +57,7 @@ export default function Home() {
           <div className="hero-text">
             <h1><span><i>새는 자리를 먼저 찾고</i></span><span><i>그 자리만 엽니다</i></span></h1>
             <p className="hero-lead">압력계로 새는 배관 계통을 가리고, 청음으로 지점을 좁힌 다음 공사합니다. 덮기 전에 다시 압력을 걸어 확인합니다. 두 지점 모두 {HOURS}.</p>
-            <div className="hero-calls">{BRANCH_LIST.map((b) => <Call key={b.key} b={b} />)}</div>
+            <div className="hero-calls"><Call /></div>
           </div>
           <figure className="hero-visual">
             <img src={`/img/${hero.id}.webp`} alt={`${BRAND} 누수탐지 - ${hero.scene}`} width={hero.w} height={hero.h} />
@@ -70,7 +70,7 @@ export default function Home() {
 
       <section className="sec mist" id="branches">
         <div className="wrap">
-          <SectionHead title="지점 두 곳, 담당 지역이 나뉩니다" sub="성남 분당·판교는 분당점, 용인 처인·기흥·수지는 용인점이 받습니다. 주소와 운영 정보는 네이버 플레이스 등록 내용 그대로입니다." />
+          <SectionHead title="지점 두 곳, 담당 지역이 나뉩니다" sub="성남 분당·판교는 분당점, 용인 처인·기흥·수지는 용인점이 방문합니다. 전화는 대표번호 하나로 받고, 주소와 운영 정보는 네이버 플레이스 등록 내용 그대로입니다." />
           <BranchPair />
         </div>
       </section>
@@ -132,7 +132,7 @@ export default function Home() {
 
       <section className="sec mist" id="area">
         <div className="wrap">
-          <SectionHead title="지역별 안내" sub="구 단위로 묶었습니다. 각 지역 페이지에 담당 지점 번호가 따로 적혀 있습니다." />
+          <SectionHead title="지역별 안내" sub="구 단위로 묶었습니다. 각 지역 페이지에 담당 지점이 적혀 있습니다." />
           <div className="areas">
             {openGus().map((g) => {
               const b = BRANCHES[GUS[g].branch];
@@ -140,7 +140,7 @@ export default function Home() {
               return (
                 <div key={g} className="area-col" data-reveal>
                   <h3><Link href={guPath(g)}>{GUS[g].full}</Link></h3>
-                  <p className="area-br">{b.name} {b.phone}</p>
+                  <p className="area-br">{b.name} 담당</p>
                   <ul>{pages.map((p) => <li key={p.slug}><Link href={pagePath(p)}>{p.kw}</Link></li>)}</ul>
                   <Link href={guPath(g)} className="more">{g} 전체 <IconArrow /></Link>
                 </div>
@@ -172,7 +172,7 @@ export default function Home() {
         <div className="wrap" data-reveal>
           <h2>언제부터, 어디가, 물을 쓰지 않을 때도 젖는지</h2>
           <p>이 세 가지를 알려 주시면 통화에서 의심 계통을 먼저 좁힙니다. 물이 계속 떨어지면 계량기 옆 메인 밸브부터 잠가 주세요.</p>
-          <div className="hero-calls">{BRANCH_LIST.map((b) => <Call key={b.key} b={b} />)}</div>
+          <div className="hero-calls"><Call /></div>
         </div>
       </section>
     </main>
