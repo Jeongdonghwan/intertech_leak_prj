@@ -1,0 +1,144 @@
+{
+ "place_id": "1046750151",
+ "collected": "2026-11-12",
+ "source": "https://m.place.naver.com/place/1046750151/home",
+ "name": "누수",
+ "category": "배관,냉난방공사",
+ "categoryCodes": [
+  "225111",
+  "225120",
+  "225213",
+  "225814",
+  "226178"
+ ],
+ "phone": null,
+ "virtualPhone": "0507-1387-7233",
+ "phone_note": "안심번호(0507)",
+ "roadAddress": "경기 용인시 기흥구 언동로217번길 31",
+ "address": "경기 용인시 기흥구 중동 1139",
+ "coordinate": {
+  "x": "127.1479282",
+  "y": "37.2788417"
+ },
+ "businessHours": [
+  "24시간 영업 / 연중무휴",
+  "매일: 00:00~24:00"
+ ],
+ "businessHoursRaw": [
+  {
+   "__typename": "NewBusinessHour",
+   "name": "",
+   "businessStatusDescription": {
+    "__typename": "BusinessStatusDescription",
+    "status": "24시간 영업",
+    "blindDescription": null,
+    "description": "연중무휴",
+    "showEndsNextDay": null
+   },
+   "businessHours": [
+    {
+     "__typename": "WorkingHoursInfo",
+     "day": "매일",
+     "businessHours": {
+      "__typename": "StartEndTime",
+      "start": "00:00",
+      "end": "24:00"
+     },
+     "breakHours": [],
+     "description": null,
+     "lastOrderTimes": null,
+     "showEndsNextDay": false
+    }
+   ],
+   "comingIrregularClosedDays": [],
+   "comingRegularClosedDays": "",
+   "freeText": ""
+  }
+ ],
+ "conveniences": [
+  "예약",
+  "방문접수/출장"
+ ],
+ "keywordList": [
+  "용인누수",
+  "기흥누수",
+  "죽전누수",
+  "수지누수",
+  "동백누수"
+ ],
+ "descriptions": [
+  "30년 노하우! 용인시 전지역 누수 전문!\n타 업체에서 해결못한 누수문제도 100% 해결해드리겠습니다.\n\n- 아파트,상가,빌라,주택,야외 등\n- 층간,벽간,화장실,바닥,공용배관,노후배관,보일러 등\n- 모든 누수 문제, 모든 문제 현장 완벽하게 해결합니다!\n\n합리적인 비용으로 부담없는 상담 도와드리겠습니다.\n감사합니다 ^^",
+  "누수 문제의 세심한 점검과 케어 방법 분석 수지누수",
+  "꼼꼼함으로 잡는 용인누수, 완벽 해결 비법 공개!",
+  "전화를 대신 받고 응대까지 해드려요!",
+  "물이 새는 속 시원한 해결, 용인누수"
+ ],
+ "menus": null,
+ "links": [],
+ "reviews": {
+  "cafeBlogTotal": 536,
+  "visitorTotal": null,
+  "visitorScore": null,
+  "fsasTotal": 536,
+  "samples": [
+   {
+    "type": "블로그",
+    "title": "용인누수 문제, 인터테크와 함께 쾌적한 집안 만들기 후기",
+    "url": "https://m.blog.naver.com/zzzau_615/223871277066",
+    "name": "호텔 브런치 인증",
+    "date": "2025.05.20."
+   },
+   {
+    "type": "블로그",
+    "title": "갑자기 물새는 집, 용인누수탐지 답은 여기?",
+    "url": "https://m.blog.naver.com/uhasbrushg86/224113697893",
+    "name": "사정제때",
+    "date": "2025.12.18."
+   },
+   {
+    "type": "블로그",
+    "title": "용인 누수, 갑자기 멈추지 않는다면?",
+    "url": "https://m.blog.naver.com/dpulldrawa44/224111160320",
+    "name": "수진이맘",
+    "date": "2025.12.16."
+   }
+  ]
+ },
+ "photos": [
+  {
+   "id": "1046750151_business_1",
+   "title": "누수",
+   "originalUrl": "https://ldb-phinf.pstatic.net/20251121_174/17636984789601BDn4_JPEG/%B4%A9%BC%F6%28%C0%CE%C5%CD%C5%D7%C5%A9_%C3%DF%B0%A1%B0%C7%29%BD%E6%B3%D7%C0%CF_1212.jpg",
+   "w": 500,
+   "h": 500
+  },
+  {
+   "id": "1046750151_business_2",
+   "title": "누수",
+   "originalUrl": "https://ldb-phinf.pstatic.net/20241212_229/1733966708962gj4a4_JPEG/KakaoTalk_20241212_102105014.jpg",
+   "w": 1152,
+   "h": 1536
+  },
+  {
+   "id": "1046750151_business_3",
+   "title": "누수",
+   "originalUrl": "https://ldb-phinf.pstatic.net/20241212_111/1733966708839VWs4d_JPEG/KakaoTalk_20241212_102107169.jpg",
+   "w": 1152,
+   "h": 1536
+  },
+  {
+   "id": "1046750151_business_4",
+   "title": "누수",
+   "originalUrl": "https://ldb-phinf.pstatic.net/20241212_41/17339667089869LiPa_JPEG/KakaoTalk_20241212_102109652.jpg",
+   "w": 1152,
+   "h": 1536
+  }
+ ],
+ "images": [
+  {
+   "origin": "https://ldb-phinf.pstatic.net/20251121_174/17636984789601BDn4_JPEG/%B4%A9%BC%F6%28%C0%CE%C5%CD%C5%D7%C5%A9_%C3%DF%B0%A1%B0%C7%29%BD%E6%B3%D7%C0%CF_1212.jpg",
+   "title": null
+  }
+ ],
+ "label": "인터테크누수"
+}

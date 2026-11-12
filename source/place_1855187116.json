@@ -1,0 +1,149 @@
+{
+ "place_id": "1855187116",
+ "collected": "2026-11-12",
+ "source": "https://m.place.naver.com/place/1855187116/home",
+ "name": "누수",
+ "category": "배관,냉난방공사",
+ "categoryCodes": [
+  "225111",
+  "225120",
+  "225213",
+  "225814",
+  "226178"
+ ],
+ "phone": null,
+ "virtualPhone": "0507-1447-1915",
+ "phone_note": "안심번호(0507)",
+ "roadAddress": "경기 성남시 분당구 서현로210번길 14 지하3층 b301호",
+ "address": "경기 성남시 분당구 서현동 248-3",
+ "coordinate": {
+  "x": "127.1245931",
+  "y": "37.3862377"
+ },
+ "businessHours": [
+  "24시간 영업 / 연중무휴",
+  "매일: 00:00~24:00"
+ ],
+ "businessHoursRaw": [
+  {
+   "__typename": "NewBusinessHour",
+   "name": "",
+   "businessStatusDescription": {
+    "__typename": "BusinessStatusDescription",
+    "status": "24시간 영업",
+    "blindDescription": null,
+    "description": "연중무휴",
+    "showEndsNextDay": null
+   },
+   "businessHours": [
+    {
+     "__typename": "WorkingHoursInfo",
+     "day": "매일",
+     "businessHours": {
+      "__typename": "StartEndTime",
+      "start": "00:00",
+      "end": "24:00"
+     },
+     "breakHours": [],
+     "description": null,
+     "lastOrderTimes": null,
+     "showEndsNextDay": false
+    }
+   ],
+   "comingIrregularClosedDays": [],
+   "comingRegularClosedDays": "",
+   "freeText": ""
+  }
+ ],
+ "conveniences": [
+  "방문접수/출장",
+  "예약"
+ ],
+ "keywordList": [
+  "분당누수",
+  "성남누수",
+  "분당누수탐지",
+  "누수탐지",
+  "인터테크누수"
+ ],
+ "descriptions": [
+  "분당전지역 누수탐지 공사전문 업체입니다. 30년 노하우를 만나보세요. 하수도, 변기뚫음 등 설비관련 모든 서비스를 제공합니다. 최신장비와 최첨단 컴퓨터를 이용한 누수탐지!\n분당, 판교, 수지, 죽전, 용인, 성남 언제나 전화주세요^^",
+  "분당누수, 보이지 않는 물샘까지 꼼꼼하게 살피는 인터테크",
+  "천안 두정동 현관문 잠김 해결한 로얄열쇠금고 방문 후기",
+  "로얄열쇠금고 천안에서 금고 열쇠 수리 빠르게 해결",
+  "분당누수 인터테크, 한방울도 놓치지않는 전문가"
+ ],
+ "menus": null,
+ "links": [
+  {
+   "type": "블로그",
+   "url": "https://blog.naver.com/lovemejja"
+  }
+ ],
+ "reviews": {
+  "cafeBlogTotal": 520,
+  "visitorTotal": null,
+  "visitorScore": null,
+  "fsasTotal": 519,
+  "samples": [
+   {
+    "type": "블로그",
+    "title": "30년 노하우 기술은 보유하신 누수 분당누수",
+    "url": "https://m.blog.naver.com/rucyoh79/223787068903",
+    "name": "✨루시의 빛나는 공간✨",
+    "date": "2025.03.07."
+   },
+   {
+    "type": "블로그",
+    "title": "확실하게 해결하는 누수 분당누수",
+    "url": "https://m.blog.naver.com/yul-hee-/223789775090",
+    "name": "‘",
+    "date": "2025.03.09."
+   },
+   {
+    "type": "블로그",
+    "title": "분당누수, 집을 지키는 숨은 영웅이 필요할 때!",
+    "url": "https://m.blog.naver.com/d1a3bwvg4nih/223844121440",
+    "name": "푸른 언덕 위 아름다운 풍경",
+    "date": "2025.04.23."
+   }
+  ]
+ },
+ "photos": [
+  {
+   "id": "1855187116_business_1",
+   "title": "누수",
+   "originalUrl": "https://ldb-phinf.pstatic.net/20251121_64/1763707580092Hbi4P_JPEG/%C0%CE%C5%CD%C5%D7%C5%A9%BD%E6%B3%D7%C0%CF_1121.jpg",
+   "w": 500,
+   "h": 500
+  },
+  {
+   "id": "1855187116_business_2",
+   "title": "누수",
+   "originalUrl": "https://ldb-phinf.pstatic.net/20241224_159/1735024658188jIvxr_JPEG/KakaoTalk_20241224_150149530.jpg",
+   "w": 1058,
+   "h": 1411
+  },
+  {
+   "id": "1855187116_business_3",
+   "title": "누수",
+   "originalUrl": "https://ldb-phinf.pstatic.net/20241224_80/1735024658257uuYLI_JPEG/KakaoTalk_20241224_150149530_01.jpg",
+   "w": 1058,
+   "h": 1411
+  },
+  {
+   "id": "1855187116_business_4",
+   "title": "누수",
+   "originalUrl": "https://ldb-phinf.pstatic.net/20241224_286/1735024658359vwGe7_JPEG/KakaoTalk_20241224_150149530_02.jpg",
+   "w": 1058,
+   "h": 1411
+  }
+ ],
+ "images": [
+  {
+   "origin": "https://ldb-phinf.pstatic.net/20251121_64/1763707580092Hbi4P_JPEG/%C0%CE%C5%CD%C5%D7%C5%A9%BD%E6%B3%D7%C0%CF_1121.jpg",
+   "title": null
+  }
+ ],
+ "label": "인터테크누수"
+}
