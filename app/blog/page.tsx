@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getPosts, postPath, postEncodedPath } from '../../lib/blog';
-import { OPEN_PAGES, pagePath, pageEncodedPath } from '../../lib/data';
+import { OPEN_PAGES, PHOTOS, pagePath, pageEncodedPath } from '../../lib/data';
 import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
 import { BranchPair, IconArrow, JsonLd, SectionHead } from '../../components/Common';
 import { BRAND, shareMeta } from '../../lib/site';
@@ -30,10 +30,13 @@ export default function BlogIndex() {
           : hubs.map((p) => ({ name: p.kw, path: pageEncodedPath(p) }))),
       ]} />
       <section className="page-hero">
-        <div className="wrap">
+        <div className="wrap page-hero-grid">
+          <div>
           <nav className="crumbs" aria-label="경로"><Link href="/">홈</Link><span>/</span><span>누수 노트</span></nav>
           <h1 className="page-title">누수 노트</h1>
           <p className="page-lead">상담 전화에서 자주 듣는 질문을 한 편에 하나씩 답합니다. 집집마다 공통인 확인 방법과 순서를 적고, 현장마다 다른 비용 숫자는 적지 않습니다.</p>
+          </div>
+        <figure className="page-hero-img"><img src={`/img/${PHOTOS[2].id}.webp`} alt={`${BRAND} 누수 노트 - ${PHOTOS[2].scene}`} width={PHOTOS[2].w} height={PHOTOS[2].h} /></figure>
         </div>
       </section>
       <section className="sec">

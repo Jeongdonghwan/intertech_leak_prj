@@ -331,10 +331,10 @@ const M: Record<string, Mod> = {
     desc: '{kw}를 찾는다면 위치 확인 근거, 탐지와 공사 연계, 가까운 지점을 보세요. {place:는} {brand} {branch}이 맡습니다.',
     heading: ['{place} {w} 업체로 {brand}', '{w} 업체를 고르는 기준'],
     paras: [
-      ['{place:는} {branch} 담당입니다. {branchAt}에서 출발하고, 두 지점 모두 24시간·연중무휴로 전화를 받습니다.', '{brand}는 분당점과 용인점 두 지점으로 나뉘어 있고, {place:는} {branch}이 맡습니다. 가까운 지점에서 나가 이동 시간을 줄입니다.'],
+      ['{place:는} {branch} 담당입니다. {place} 어디든 방문 견적이 되고, 두 지점 모두 24시간·연중무휴로 전화를 받습니다.', '{brand}는 분당점과 용인점 두 지점으로 나뉘어 있고, {place:는} {branch}이 맡습니다. 담당 지역 안이라 방문 일정을 잡기 수월합니다.'],
       ['업체를 고를 때는 위치를 어떻게 확인했는지 근거를 보여 주는지, 탐지 뒤 공사와 마감까지 이어서 하는지를 보세요. 두 단계가 나뉘면 책임 범위가 흐려집니다.', '탐지만 하는 곳과 공사까지 하는 곳이 있습니다. 탐지·공사·확인을 한 팀이 하면 공사 뒤 다시 새는지까지 같은 기준으로 봅니다.'],
     ],
-    faq: [{ q: '{place} 근처 업체를 부르는 게 나은가요?', a: '이동 거리가 짧으면 방문 시간을 맞추기 쉽습니다. {place:는} {branch}에서 맡고, 통화 때 도착 예상 시간을 안내드립니다.' }],
+    faq: [{ q: '{place} 근처 업체를 부르는 게 나은가요?', a: '{place:는} {branch}이 맡는 담당 지역이라 방문 시간을 맞추기 쉽습니다. 통화 때 도착 예상 시간을 안내드립니다.' }],
   },
   전문: {
     title: ['{kw} — 원인 확인 중심 {brand}', '{kw} | {branch} 탐지·공사', '{kw}, 무엇을 전문으로 보나'],
@@ -362,7 +362,7 @@ const M: Record<string, Mod> = {
     heading: ['{place} {w}, 맡기기 전 확인할 것', '{w} 추천을 받을 때 같이 물을 것'],
     paras: [
       ['추천을 받을 때는 이름보다 그 업체가 어떤 순서로 일했는지를 물어보세요. 탐지 방법, 여는 범위, 공사 뒤 확인까지 들었다면 비교 기준이 생깁니다.', '이웃이나 관리사무소에서 추천을 받으셨다면 그 집 현장이 어떤 유형이었는지도 물어보세요. 욕실 누수와 땅속 수도관 누수는 보는 방법이 다릅니다.'],
-      ['{place:는} {branch} 담당이고, {branchAt}에서 나갑니다. 업체 소개 기준 30년 노하우를 내세우는 곳이며, 건물 종류와 누수 유형을 가리지 않고 상담합니다.', '{brand}는 플레이스에 두 지점이 등록돼 있습니다. {place:는} {branch}에서 맡고, 소개 원문의 \'30년 노하우\'는 업체가 직접 적은 문구입니다.'],
+      ['{place:는} {branch} 담당이고, {place} 현장까지 방문해 확인합니다. 업체 소개 기준 30년 노하우를 내세우는 곳이며, 건물 종류와 누수 유형을 가리지 않고 상담합니다.', '{brand}는 플레이스에 두 지점이 등록돼 있습니다. {place:는} {branch}에서 맡고, 소개 원문의 \'30년 노하우\'는 업체가 직접 적은 문구입니다.'],
     ],
     faq: [{ q: '{brand}는 어디에 있나요?', a: '분당점은 성남시 분당구 서현로210번길 14, 용인점은 용인시 기흥구 언동로217번길 31에 있습니다. {place:는} {branch} 담당입니다.' }],
   },
@@ -391,7 +391,7 @@ const M: Record<string, Mod> = {
     desc: '{kw}: {place:는} {brand} {branch}이 방문합니다. 플레이스 기준 방문접수/출장·예약 가능, 24시간·연중무휴 상담입니다.',
     heading: ['{place} {w} 출장 방문', '{w} 출장, 방문 전에 알려 주실 것'],
     paras: [
-      ['두 지점 모두 플레이스 편의 정보에 \'방문접수/출장\'과 \'예약\'이 등록돼 있습니다. {place:는} {branch}에서 방문합니다.', '{branch}은 {branchAt}에 있고 {place}까지 나갑니다. 예약 방문도 되므로 위아래층 협조가 필요한 현장은 시간을 맞춰 잡으시면 좋습니다.'],
+      ['두 지점 모두 플레이스 편의 정보에 \'방문접수/출장\'과 \'예약\'이 등록돼 있습니다. {place:는} {branch}에서 방문합니다.', '{branch}이 {place}까지 방문합니다. 예약 방문도 되므로 위아래층 협조가 필요한 현장은 시간을 맞춰 잡으시면 좋습니다.'],
       ['방문 전에 주소와 동·호수, 주차 가능 여부, 젖은 자리 위치를 알려 주세요. 공동주택은 관리사무소 출입 절차가 있는지도 같이 확인해 두면 도착 뒤 지체가 줄어듭니다.', '현장 도착 뒤에는 계량기·보일러 확인부터 시작하므로, 계량기함과 보일러실에 손이 닿도록 물건을 치워 두시면 확인이 빨라집니다.'],
     ],
     faq: [{ q: '출장 방문은 예약해야 하나요?', a: '바로 접수도 되고 원하는 시간에 예약도 됩니다. 위층·아래층과 같이 확인해야 하는 현장은 예약으로 시간을 맞추는 편이 낫습니다.' }],
@@ -399,7 +399,6 @@ const M: Record<string, Mod> = {
 };
 
 // ---- 지점 문장 ----
-const branchAt = (b: Branch) => (b.key === 'bundang' ? '분당구 서현동 분당점' : '기흥구 중동 용인점');
 
 // ---- 결과 ----
 export interface Composed {
@@ -440,7 +439,7 @@ export function compose(p: Page): Composed {
   const wl = w.label;
   const placeName = P.name;
   const v: Record<string, string> = {
-    kw: p.kw, w: wl, place: P.name, branch: b.name, brand: BRAND, branchAt: branchAt(b),
+    kw: p.kw, w: wl, place: P.name, branch: b.name, brand: BRAND,
     answer: pick(w.answer, s, 'ans'),
   };
   const F = (t: string) => fill(t, v);
@@ -466,9 +465,9 @@ export function compose(p: Page): Composed {
     P.unit === '구' || P.unit === '시·군' ? G.note : pick([`${G.full} 전체로 보면 ${G.note}`, `${G.note.split('. ')[0]}. ${placeName}도 그 흐름 안에 있습니다.`], s, 'rg2'),
     pick(BUILDING[P.ctx].text, s, 'bd'),
     pick([
-      `${j(placeName, '은')} ${branchAt(b)}에서 맡습니다. ${b.name} 소개 원문에 적힌 출동 범위는 '${b.area}'입니다.`,
-      `담당은 ${b.name}입니다. ${b.addr}에 있고, 소개 원문 기준 담당 범위는 '${b.area}'입니다.`,
-      `${b.name}(${b.addr.replace(/^경기 /, '')})이 ${placeName} 상담과 방문을 맡습니다.`,
+      `${j(placeName, '은')} ${j(b.name, '이')} 맡아 방문합니다. ${b.name} 소개 원문에 적힌 출동 범위는 '${b.area}'입니다.`,
+      `담당은 ${b.name}입니다. 소개 원문 기준 담당 범위는 '${b.area}'이고, ${j(placeName, '도')} 방문 지역에 들어갑니다.`,
+      `${j(b.name, '이')} ${placeName} 상담과 방문을 함께 맡습니다.`,
     ], s, 'rg4'),
   ];
   const region = {
@@ -506,7 +505,7 @@ export function compose(p: Page): Composed {
   const stepNames = ['탐지', '원인', '공사', '확인'];
   const steps = stepNames.map((k, i) => ({ k, text: w.step[i] }));
 
-  const photos = photosFor(p, 3).map((ph) => ({ p: ph, caption: ph.scene }));
+  const photos = photosFor(p, 6).map((ph) => ({ p: ph, caption: ph.scene }));
 
   const faq = [
     ...w.faq.map((f) => ({ q: F(f.q), a: F(f.a) })),
@@ -526,7 +525,7 @@ export function compose(p: Page): Composed {
     heading: pick([`${placeName} ${wl}, 젖은 자리와 시점을 알려 주세요`, `${b.name}이 ${placeName} 현장을 봅니다`, `${placeName}에서 물이 샐 때 연락처`], s, 'cl').replace(`${b.name}이`, j(b.name, '이')),
     text: pick([
       `언제부터 어디가 젖는지, 물을 쓰지 않을 때도 젖는지만 알려 주시면 통화에서 의심 계통을 먼저 좁힙니다. 대표번호 ${PHONE}, ${HOURS}.`,
-      `${b.name}은 ${b.addr}에 있습니다. 접수는 ${HOURS}이고, 방문 예약도 됩니다.`,
+      `${j(b.name, '이')} ${placeName}까지 방문합니다. 접수는 ${HOURS}이고, 방문 예약도 됩니다.`,
       `계량기 사진과 젖은 자리 사진이 있으면 통화가 짧아집니다. 대표번호 ${PHONE}로 연락 주세요.`,
     ], s, 'clt'),
   };

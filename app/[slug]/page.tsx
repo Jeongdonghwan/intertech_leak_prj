@@ -37,7 +37,9 @@ export default function KeywordPage({ params }: { params: { slug: string } }) {
   const rel = related(p);
   const path = pageEncodedPath(p);
   const relList = [...rel.samePlace, ...rel.sameGu, ...rel.otherGu].map((x) => ({ name: x.kw, path: pageEncodedPath(x) }));
-  const [lead, ...rest] = c.photos;
+  const [lead, ...more] = c.photos;
+  const strip = more.slice(0, 3);
+  const rest = more.slice(3);
 
   return (
     <main>
@@ -78,6 +80,14 @@ export default function KeywordPage({ params }: { params: { slug: string } }) {
           <h2>{p.kw}, 먼저 답부터</h2>
           <p>{c.answer}</p>
         </section>
+        <div className="kw-strip">
+          {strip.map(({ p: x, caption }) => (
+            <figure key={x.id}>
+              <img src={`/img/${x.id}.webp`} alt={`${p.kw} - ${caption}`} width={x.w} height={x.h} loading="lazy" />
+              <figcaption>{caption}</figcaption>
+            </figure>
+          ))}
+        </div>
       </div>
 
       <section className="sec">

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { BRAND, BRANCHES, PHONE, shareMeta } from '../../../lib/site';
-import { GUS, PLACES, openGus, guPages, pagePath, pageEncodedPath, guEncodedPath, Page } from '../../../lib/data';
+import { GUS, PLACES, PHOTOS, openGus, guPages, pagePath, pageEncodedPath, guEncodedPath, Page } from '../../../lib/data';
 import { WORD_LABEL } from '../../../lib/compose';
 import { breadcrumbJsonLd, itemListJsonLd } from '../../../lib/jsonld';
 import { BranchPair, JsonLd, SectionHead } from '../../../components/Common';
@@ -31,6 +31,7 @@ export default function GuPage({ params }: { params: { gu: string } }) {
   const G = GUS[gu];
   if (!G) notFound();
   const b = BRANCHES[G.branch];
+  const hp = PHOTOS.find((x) => x.branch === G.branch) || PHOTOS[0];
   const pages = guPages(gu);
   const byPlace = new Map<string, Page[]>();
   for (const p of pages) { const a = byPlace.get(p.place) || []; a.push(p); byPlace.set(p.place, a); }
@@ -42,10 +43,13 @@ export default function GuPage({ params }: { params: { gu: string } }) {
         itemListJsonLd(pages.map((p) => ({ name: p.kw, path: pageEncodedPath(p) }))),
       ]} />
       <section className="page-hero">
-        <div className="wrap">
+        <div className="wrap page-hero-grid">
+          <div>
           <nav className="crumbs" aria-label="경로"><Link href="/">홈</Link><span>/</span><Link href="/area/">지역</Link><span>/</span><span>{G.full}</span></nav>
           <h1 className="page-title">{G.full} 누수탐지 · 누수공사</h1>
           <p className="page-lead">{G.note} {G.full}는 {b.name}이 맡고, 전화는 대표번호 {PHONE}로 받습니다.</p>
+          </div>
+        <figure className="page-hero-img"><img src={`/img/${hp.id}.webp`} alt={`${G.full} 누수탐지 - ${hp.scene}`} width={hp.w} height={hp.h} /></figure>
         </div>
       </section>
       <section className="sec">

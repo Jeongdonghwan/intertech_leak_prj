@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { BRAND, BRANCHES, shareMeta } from '../../lib/site';
-import { GUS, PLACES, openGus, guPages, guPath, guEncodedPath } from '../../lib/data';
+import { GUS, PLACES, PHOTOS, openGus, guPages, guPath, guEncodedPath } from '../../lib/data';
 import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
 import { BranchPair, IconArrow, JsonLd, SectionHead } from '../../components/Common';
 
@@ -23,10 +23,13 @@ export default function AreaIndex() {
         itemListJsonLd(gus.map((g) => ({ name: `${GUS[g].full} 누수탐지`, path: guEncodedPath(g) }))),
       ]} />
       <section className="page-hero">
-        <div className="wrap">
+        <div className="wrap page-hero-grid">
+          <div>
           <nav className="crumbs" aria-label="경로"><Link href="/">홈</Link><span>/</span><span>지역</span></nav>
           <h1 className="page-title">지역별 누수탐지 안내</h1>
           <p className="page-lead">{DESC}</p>
+          </div>
+        <figure className="page-hero-img"><img src={`/img/${PHOTOS[1].id}.webp`} alt={`${BRAND} 누수탐지 - ${PHOTOS[1].scene}`} width={PHOTOS[1].w} height={PHOTOS[1].h} /></figure>
         </div>
       </section>
       <section className="sec">

@@ -59,13 +59,16 @@ export default function Home() {
             <h1><span><i>새는 자리를 먼저 찾고</i></span><span><i>그 자리만 엽니다</i></span></h1>
             <p className="hero-lead">압력계로 새는 배관 계통을 가리고, 청음으로 지점을 좁힌 다음 공사합니다. 덮기 전에 다시 압력을 걸어 확인합니다. 두 지점 모두 {HOURS}.</p>
             <div className="hero-calls"><Call /><Link href="#process" className="more">진단 순서 보기 <IconArrow /></Link></div>
+            <ol className="hero-strip" aria-label="진단 순서 사진">
+              {PROCESS.map((s) => {
+                const x = ph(s.p);
+                return <li key={s.k}><figure><img src={`/img/${x.id}.webp`} alt={`${s.k} 단계 - ${x.scene}`} width={x.w} height={x.h} /><figcaption>{s.k}</figcaption></figure></li>;
+              })}
+            </ol>
           </div>
           <div className="hero-visual">
             <figure className="arch"><img src={`/img/${hero.id}.webp`} alt={`${BRAND} 누수탐지 - ${hero.scene}`} width={hero.w} height={hero.h} /></figure>
             <p className="float float-tl"><small>지점</small><b>분당점 · 용인점</b></p>
-            <ol className="chart float float-br" aria-label="진단 순서">
-              {PROCESS.map((s) => <li key={s.k}><b>{s.k}</b><span>{s.h}</span></li>)}
-            </ol>
           </div>
         </div>
       </section>
@@ -73,19 +76,10 @@ export default function Home() {
       <section className="sec" id="process">
         <div className="wrap">
           <SectionHead title="탐지 · 원인 · 공사 · 확인" sub="젖은 자리와 새는 자리는 다른 경우가 많습니다. 네 단계는 순서를 바꾸지 않습니다." />
-          <ol className="path path-photo reveal-group">
-            {PROCESS.map((s) => {
-              const x = ph(s.p);
-              return (
-                <li key={s.k}>
-                  <figure><img src={`/img/${x.id}.webp`} alt={`${s.k} 단계 - ${x.scene}`} width={x.w} height={x.h} loading="lazy" /><span className="path-k">{s.k}</span></figure>
-                  <h3>{s.h}</h3>
-                  <p>{s.t}</p>
-                </li>
-              );
-            })}
+          <ol className="path path-text reveal-group">
+            {PROCESS.map((s) => <li key={s.k}><span className="path-k">{s.k}</span><h3>{s.h}</h3><p>{s.t}</p></li>)}
           </ol>
-          <p className="note" data-reveal>사진은 두 지점이 네이버 플레이스에 올린 현장 사진입니다. 업체 소개 원문: &lsquo;최신장비와 최첨단 컴퓨터를 이용한 누수탐지&rsquo;.</p>
+          <p className="note" data-reveal>위 사진은 두 지점이 네이버 플레이스에 올린 현장 사진입니다. 업체 소개 원문: &lsquo;최신장비와 최첨단 컴퓨터를 이용한 누수탐지&rsquo;.</p>
         </div>
       </section>
 
