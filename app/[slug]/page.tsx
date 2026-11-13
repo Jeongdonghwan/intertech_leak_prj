@@ -65,10 +65,11 @@ export default function KeywordPage({ params }: { params: { slug: string } }) {
             <p className="hero-lead">{c.lead}</p>
             <div className="hero-calls"><Call b={b} /></div>
           </div>
-          <figure className="hero-visual">
-            <img src={`/img/${lead.p.id}.webp`} alt={`${p.kw} - ${lead.caption}`} width={lead.p.w} height={lead.p.h} />
-            <dl className="chart chart-dl">{c.summary.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
-          </figure>
+          <div className="hero-visual">
+            <figure className="arch"><img src={`/img/${lead.p.id}.webp`} alt={`${p.kw} - ${lead.caption}`} width={lead.p.w} height={lead.p.h} /></figure>
+            <p className="float float-tl"><small>{G.full}</small><b>{b.name} 담당</b></p>
+            <dl className="chart chart-dl float float-br">{c.summary.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+          </div>
         </div>
       </section>
 

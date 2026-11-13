@@ -25,8 +25,9 @@ export const Glyph = ({ size = 34 }: { size?: number }) => (
 // 주 행동 — 지점명 + 번호를 버튼 글자로
 export const Call = ({ dark = false }: { b?: Branch; dark?: boolean }) => (
   <a className={dark ? 'call call-line' : 'call'} href={tel} aria-label={`${BRAND} 대표번호 ${PHONE}`}>
-    <small>대표번호 · 24시간</small>
-    <span><IconPhone />{PHONE}</span>
+    <IconPhone />
+    <span><small>대표번호 · 24시간</small>{PHONE}</span>
+    <IconArrow />
   </a>
 );
 
@@ -58,25 +59,21 @@ export const BranchPair = ({ focus }: { focus?: Branch }) => {
   );
 };
 
+// 헤더 — 흰 반투명 한 줄(로고 · 메뉴 · 대표번호), 스크롤하면 그림자
 export const Header = () => (
   <header className="site-header">
-    <div className="topline">
-      <div className="wrap topline-in">
-        <span className="hide-m">누수탐지 · 누수공사 · 하수도·변기 뚫음 — {HOURS}</span>
-        <span className="topline-tel"><a href={tel}>대표번호 <b>{PHONE}</b></a></span>
-      </div>
-    </div>
     <div className="wrap header-inner">
       <Link href="/" className="logo" aria-label={`${BRAND} 홈`}>
-        <Glyph />
-        <span className="logo-text"><b>{BRAND}</b><small>분당 · 용인 누수탐지</small></span>
+        <Glyph size={30} />
+        <span className="logo-text"><b><em>인터테크</em>누수</b><small>분당 · 용인 누수탐지</small></span>
       </Link>
       <nav className="nav" aria-label="주 메뉴">
         <Link href="/#process">진단 순서</Link>
+        <Link href="/#branches">지점 안내</Link>
         <Link href="/area/">지역</Link>
         <Link href="/blog/">누수 노트</Link>
-        <Link href="/#branches" className="nav-cta">지점 안내</Link>
       </nav>
+      <a className="head-tel" href={tel} aria-label={`대표번호 ${PHONE}`}><IconPhone /><span>{PHONE}</span></a>
     </div>
   </header>
 );

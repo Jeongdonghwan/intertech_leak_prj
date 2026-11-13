@@ -46,7 +46,8 @@ export default function Home() {
   const top = OPEN_PAGES.filter((p) => p.unit === '시·군' || p.unit === '구').slice(0, 30);
   const list = (top.length >= 10 ? top : OPEN_PAGES.slice(0, 30)).map((p) => ({ name: p.kw, path: pageEncodedPath(p) }));
   const posts = getPosts().slice(0, 4);
-  const hero = ph('p1');
+  const hero = ph('p4');
+  const sewer = ph('p6');
 
   return (
     <main>
@@ -57,34 +58,27 @@ export default function Home() {
           <div className="hero-text">
             <h1><span><i>새는 자리를 먼저 찾고</i></span><span><i>그 자리만 엽니다</i></span></h1>
             <p className="hero-lead">압력계로 새는 배관 계통을 가리고, 청음으로 지점을 좁힌 다음 공사합니다. 덮기 전에 다시 압력을 걸어 확인합니다. 두 지점 모두 {HOURS}.</p>
-            <div className="hero-calls"><Call /></div>
+            <div className="hero-calls"><Call /><Link href="#process" className="more">진단 순서 보기 <IconArrow /></Link></div>
           </div>
-          <figure className="hero-visual">
-            <img src={`/img/${hero.id}.webp`} alt={`${BRAND} 누수탐지 - ${hero.scene}`} width={hero.w} height={hero.h} />
-            <ol className="chart" aria-label="진단 순서">
+          <div className="hero-visual">
+            <figure className="arch"><img src={`/img/${hero.id}.webp`} alt={`${BRAND} 누수탐지 - ${hero.scene}`} width={hero.w} height={hero.h} /></figure>
+            <p className="float float-tl"><small>지점</small><b>분당점 · 용인점</b></p>
+            <ol className="chart float float-br" aria-label="진단 순서">
               {PROCESS.map((s) => <li key={s.k}><b>{s.k}</b><span>{s.h}</span></li>)}
             </ol>
-          </figure>
-        </div>
-      </section>
-
-      <section className="sec mist" id="branches">
-        <div className="wrap">
-          <SectionHead title="지점 두 곳, 담당 지역이 나뉩니다" sub="성남 분당·판교는 분당점, 용인 처인·기흥·수지는 용인점이 방문합니다. 전화는 대표번호 하나로 받고, 주소와 운영 정보는 네이버 플레이스 등록 내용 그대로입니다." />
-          <BranchPair />
+          </div>
         </div>
       </section>
 
       <section className="sec" id="process">
         <div className="wrap">
           <SectionHead title="탐지 · 원인 · 공사 · 확인" sub="젖은 자리와 새는 자리는 다른 경우가 많습니다. 네 단계는 순서를 바꾸지 않습니다." />
-          <ol className="path reveal-group">
+          <ol className="path path-photo reveal-group">
             {PROCESS.map((s) => {
               const x = ph(s.p);
               return (
                 <li key={s.k}>
-                  <span className="path-k">{s.k}</span>
-                  <figure><img src={`/img/${x.id}.webp`} alt={`${s.k} 단계 - ${x.scene}`} width={x.w} height={x.h} loading="lazy" /></figure>
+                  <figure><img src={`/img/${x.id}.webp`} alt={`${s.k} 단계 - ${x.scene}`} width={x.w} height={x.h} loading="lazy" /><span className="path-k">{s.k}</span></figure>
                   <h3>{s.h}</h3>
                   <p>{s.t}</p>
                 </li>
@@ -95,9 +89,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="sec slate">
+      <section className="sec mist">
         <div className="wrap">
-          <SectionHead light title="누수 유형별로 보는 곳" sub="용인점 소개 원문의 유형 목록(층간·벽간·화장실·바닥·공용배관·노후배관·보일러)에 야외 배관을 더했습니다." />
+          <SectionHead title="누수 유형별로 보는 곳" sub="용인점 소개 원문의 유형 목록(층간·벽간·화장실·바닥·공용배관·노후배관·보일러)에 야외 배관을 더했습니다." />
           <div className="tbl-wrap" data-reveal>
             <table className="tbl">
               <thead><tr><th scope="col">유형</th><th scope="col">새는 곳</th><th scope="col">먼저 하는 확인</th></tr></thead>
@@ -117,20 +111,28 @@ export default function Home() {
       </section>
 
       <section className="sec tint">
-        <div className="wrap split">
+        <div className="wrap feature">
+          <figure className="feature-img" data-reveal><img src={`/img/${sewer.id}.webp`} alt={`하수도·배수 점검 - ${sewer.scene}`} width={sewer.w} height={sewer.h} loading="lazy" /></figure>
           <div data-reveal>
             <h2 className="h2-plain">하수도 · 변기 뚫음도 같이 봅니다</h2>
             <p>분당점 소개 원문은 &lsquo;하수도, 변기뚫음 등 설비관련 모든 서비스를 제공합니다&rsquo;입니다. 배수가 막혀 역류한 물이 바닥을 적시면 누수처럼 보이기 때문에, 누수 확인 때 배수 상태도 함께 봅니다.</p>
-          </div>
-          <dl className="facts" data-reveal>
+          <dl className="details">
             <div><dt>플레이스 업종</dt><dd>배관, 냉난방공사</dd></div>
             <div><dt>편의</dt><dd>방문접수/출장 · 예약</dd></div>
             <div><dt>영업시간</dt><dd>매일 00:00~24:00 · 연중무휴</dd></div>
           </dl>
+          </div>
         </div>
       </section>
 
-      <section className="sec mist" id="area">
+      <section className="sec mist" id="branches">
+        <div className="wrap">
+          <SectionHead title="지점 두 곳, 담당 지역이 나뉩니다" sub="성남 분당·판교는 분당점, 용인 처인·기흥·수지는 용인점이 방문합니다. 전화는 대표번호 하나로 받고, 주소와 운영 정보는 네이버 플레이스 등록 내용 그대로입니다." />
+          <BranchPair />
+        </div>
+      </section>
+
+      <section className="sec" id="area">
         <div className="wrap">
           <SectionHead title="지역별 안내" sub="구 단위로 묶었습니다. 각 지역 페이지에 담당 지점이 적혀 있습니다." />
           <div className="areas">
@@ -150,14 +152,14 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="sec" id="faq">
+      <section className="sec mist" id="faq">
         <div className="wrap narrow">
           <SectionHead title="자주 묻는 질문" />
           <div className="faq">{FAQ.map((f) => <details key={f.q} data-reveal><summary>{f.q}<i /></summary><p>{f.a}</p></details>)}</div>
         </div>
       </section>
 
-      <section className="sec mist">
+      <section className="sec">
         <div className="wrap">
           <SectionHead title="누수 노트" sub="상담 때 자주 받는 질문을 한 편에 하나씩 정리합니다." />
           {posts.length > 0 ? (
@@ -169,10 +171,15 @@ export default function Home() {
       </section>
 
       <section className="closing">
-        <div className="wrap" data-reveal>
-          <h2>언제부터, 어디가, 물을 쓰지 않을 때도 젖는지</h2>
-          <p>이 세 가지를 알려 주시면 통화에서 의심 계통을 먼저 좁힙니다. 물이 계속 떨어지면 계량기 옆 메인 밸브부터 잠가 주세요.</p>
-          <div className="hero-calls"><Call /></div>
+        <div className="wrap closing-grid">
+          <div data-reveal>
+            <h2>언제부터, 어디가, 물을 쓰지 않을 때도 젖는지</h2>
+            <p>이 세 가지를 알려 주시면 통화에서 의심 계통을 먼저 좁힙니다. 물이 계속 떨어지면 계량기 옆 메인 밸브부터 잠가 주세요.</p>
+          </div>
+          <div className="closing-box" data-reveal>
+            <dl><div><dt>운영</dt><dd>{HOURS}</dd></div><div><dt>지점</dt><dd>분당점 · 용인점</dd></div></dl>
+            <Call />
+          </div>
         </div>
       </section>
     </main>
