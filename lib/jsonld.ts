@@ -19,7 +19,7 @@ const branchLd = (b: Branch) => ({
 export const businessJsonLd = () => ({
   '@context': 'https://schema.org',
   '@graph': [
-    { '@type': 'Organization', '@id': `${SITE_URL}/#org`, name: BRAND, url: `${SITE_URL}/`, logo: `${SITE_URL}/icon.png`,
+    { '@type': 'Organization', '@id': `${SITE_URL}/#org`, name: BRAND, url: `${SITE_URL}/`, logo: `${SITE_URL}/icon.png`, sameAs: BRANCH_LIST.map((b) => b.place),
       department: BRANCH_LIST.map((b) => ({ '@id': `${SITE_URL}/#${b.key}` })),
       knowsAbout: ['누수탐지', '누수공사', '층간 누수', '벽간 누수', '화장실 누수', '바닥 누수', '공용배관 누수', '노후배관', '보일러 배관 누수', '하수도 뚫음', '변기 뚫음'] },
     ...BRANCH_LIST.map(branchLd),

@@ -1,6 +1,6 @@
 // 공통 UI — 이모지 없이 선 아이콘, 각진(2px) 버튼, 지점 2곳 연락처.
 import Link from 'next/link';
-import { BRAND, BRANCH_LIST, HOURS, Branch, PHONE, tel } from '../lib/site';
+import { BRAND, BRANCH_LIST, HOURS, Branch, PHONE, UPDATED, tel } from '../lib/site';
 
 export const JsonLd = ({ data }: { data: object | object[] }) => (
   <>{(Array.isArray(data) ? data : [data]).map((d, i) => <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(d).replace(/</g, '\\u003c') }} />)}</>
@@ -85,7 +85,7 @@ export const Footer = () => (
         <strong className="foot-brand"><Glyph size={26} />{BRAND}</strong>
         <p>누수탐지 · 누수공사 · 층간 · 벽간 · 화장실 · 바닥 · 공용배관 · 노후배관 · 보일러 누수<br />하수도 · 변기 뚫음 등 설비 · {HOURS}</p>
         <p>대표번호 <a href={tel}>{PHONE}</a></p>
-        <p><Link href="/area/">지역 안내</Link> · <Link href="/blog/">누수 노트</Link> · <a href="/rss.xml">RSS</a></p>
+        <p><Link href="/about/">소개</Link> · <Link href="/area/">지역 안내</Link> · <Link href="/blog/">누수 노트</Link> · <a href="/rss.xml">RSS</a></p>
       </div>
       {BRANCH_LIST.map((b) => (
         <ul key={b.key} className="foot-info">
@@ -95,7 +95,7 @@ export const Footer = () => (
         </ul>
       ))}
     </div>
-    <div className="wrap foot-bottom">© {new Date().getFullYear()} {BRAND} · 상담 때 받은 주소·연락처는 방문과 안내에만 씁니다.</div>
+    <div className="wrap foot-bottom">© {new Date().getFullYear()} {BRAND} · 최종 수정 <time dateTime={UPDATED}>{UPDATED}</time> · 상담 때 받은 주소·연락처는 방문과 안내에만 씁니다.</div>
   </footer>
 );
 

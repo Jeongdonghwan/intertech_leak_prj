@@ -37,6 +37,7 @@ export const HOURS = '24시간 · 연중무휴'; // 두 플레이스 모두 '24�
 // 순차 오픈: 이 묶음 이하의 페이지만 빌드·사이트맵·내부링크에 포함된다.
 //   1~4 = 키워드 1,000개를 우선순위 순으로 25%씩 (data/drip.json, scripts/drip/). 5+ = 오픈 뒤 추가분
 export const OPEN_WAVE = Number(process.env.OPEN_WAVE || 1);
+export const UPDATED = '2026-11-16'; // content revision date - bump when page text changes
 
 export const telOf = (b: Branch) => `tel:${b.phone.replace(/[^0-9]/g, '')}`;
 export const absUrl = (path: string) => `${SITE_URL}${path}`;
