@@ -28,8 +28,8 @@ OPEN_WAVE=4 SITE_URL=https://도메인 npx next build
 bash scripts/deploy.sh <묶음> <https://도메인>   # git remote(origin) 필요 — 아직 없음
 python -I scripts/drip/drip_status.py data/drip.json  # launch null → WAVE=0 POST=0
 ```
-`data/drip.json`: siteUrl `http://127.0.0.1:18992`(임시), launch null. 오픈일 정해지면 launch·siteUrl 채우고 schedule_posts 실행.
-미리보기: `OPEN_WAVE=4 npx next build` 후 `python -m http.server 18992 -d out` → http://127.0.0.1:18992/
+`data/drip.json`: siteUrl `https://xn--od1by81a54d7vk81a2e.kr`(임시), launch null. 오픈일 정해지면 launch·siteUrl 채우고 schedule_posts 실행.
+미리보기: `OPEN_WAVE=4 npx next build` 후 `python -m http.server 18992 -d out` → https://xn--od1by81a54d7vk81a2e.kr/
 
 ## 본문 조합 (`lib/compose.ts`)
 단어 10종(누수·누수탐지·누수공사·누수수리·화장실누수·천장누수·배관누수·수도누수·아파트누수·누수탐지업체)마다 답·문단 3묶음×2벌·목록·증상·4단계·FAQ, 수식어 11종(없음·비용·가격·견적·업체·전문·잘하는곳·추천·24시·당일·출장)마다 절·FAQ, 지역 66곳 사실 + 구 설명 + 건물 맥락(apt/mixed/rural) 3벌. 슬러그 해시로 고정 선택. 조사는 `{place:는}` 토큰·`j()`.

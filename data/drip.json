@@ -1,10 +1,1 @@
-{
- "siteUrl": "http://127.0.0.1:18992",
- "launch": null,
- "everyDays": 2,
- "maxWave": 4,
- "postDays": 30,
- "postsPerDay": 1.5,
- "hold": null,
- "extra": []
-}
+{"siteUrl": "https://xn--od1by81a54d7vk81a2e.kr", "launch": "2026-11-16", "everyDays": 2, "maxWave": 1, "postDays": 30, "postsPerDay": 7.5, "hold": null, "extra": []}

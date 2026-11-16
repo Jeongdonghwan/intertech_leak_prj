@@ -4,7 +4,7 @@
 //   전화: 두 지점 플레이스 썸네일 이미지에 공통으로 적힌 010-3292-1914 를 대표번호로 쓴다(사용자 규칙: 010·대표번호 우선).
 //   플레이스 0507 안심번호(분당점 0507-1447-1915, 용인점 0507-1387-7233)는 쓰지 않는다.
 
-export const SITE_URL = process.env.SITE_URL || 'http://127.0.0.1:18992'; // TODO 도메인 확정 후 교체
+export const SITE_URL = process.env.SITE_URL || 'https://xn--od1by81a54d7vk81a2e.kr'; // TODO 도메인 확정 후 교체
 export const BRAND = '인터테크누수';
 export const SITE_NAME = `${BRAND} | 분당·용인 누수탐지·누수공사`;
 

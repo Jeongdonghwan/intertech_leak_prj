@@ -21,7 +21,7 @@ from rebatch import rebatch  # noqa: E402
 ROOT = HERE.parent
 SRC = ROOT / 'keywords' / '인터테크누수_키워드.xlsx'
 OUT_XLSX = ROOT / 'keywords' / '인터테크누수_키워드_페이지.xlsx'
-SITE_URL = 'http://127.0.0.1:18992'  # lib/site.ts 기본값과 같게 (도메인 정해지면 둘 다)
+SITE_URL = 'https://xn--od1by81a54d7vk81a2e.kr'  # lib/site.ts 기본값과 같게 (도메인 정해지면 둘 다)
 BASE, EXTRA_SIZE = 1000, 400
 
 places = json.loads((ROOT / 'data' / 'places.json').read_text(encoding='utf-8'))

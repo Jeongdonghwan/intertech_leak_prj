@@ -1,4 +1,4 @@
-import { SITE_URL, SITE_NAME, BRAND, BRANCH_LIST, Branch, PHONE } from './site';
+import { SITE_URL, SITE_NAME, BRAND, BRANCH_LIST, Branch, PHONE, UPDATED } from './site';
 
 const branchLd = (b: Branch) => ({
   '@type': 'Plumber',
@@ -56,6 +56,7 @@ export const serviceJsonLd = (o: { name: string; type: string; description: stri
   description: o.description,
   url: `${SITE_URL}${o.path}`,
   areaServed: { '@type': 'Place', name: o.area },
+  dateModified: UPDATED,
   provider: { '@id': `${SITE_URL}/#${o.branch.key}` },
 });
 

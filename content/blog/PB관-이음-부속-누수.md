@@ -7,8 +7,8 @@ pattern: cause
 industry: 누수
 channel: blog
 region: null
-date:
-publishedAt:
+date: 2026-11-19
+publishedAt: 2026-11-19
 ---
 
 ## 새는 곳은 대개 이음 자리입니다
