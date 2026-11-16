@@ -7,8 +7,8 @@ pattern: compare
 industry: 누수
 channel: blog
 region: null
-date:
-publishedAt:
+date: 2026-11-28
+publishedAt: 2026-11-28
 ---
 
 ## 새는 자리와 이유가 서로 다릅니다
