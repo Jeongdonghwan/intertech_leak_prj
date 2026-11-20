@@ -7,7 +7,7 @@ import { getPosts, postPath } from '../lib/blog';
 import { faqJsonLd, itemListJsonLd } from '../lib/jsonld';
 import { BranchPair, Call, IconArrow, JsonLd, SectionHead } from '../components/Common';
 
-const DESC = `분당·성남은 분당점, 용인 처인·기흥·수지는 용인점. ${BRAND}는 압력계로 새는 배관을 가리고 청음으로 지점을 좁힌 뒤 그 자리만 열어 고칩니다. ${HOURS}.`;
+const DESC = `분당·성남은 분당점, 용인은 용인점. ${BRAND}는 압력계·청음으로 새는 지점을 찾아 그 자리만 열어 고칩니다. ${HOURS}.`;
 export const metadata: Metadata = {
   title: SITE_NAME,
   description: DESC,
