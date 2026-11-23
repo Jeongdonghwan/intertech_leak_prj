@@ -64,3 +64,8 @@ python -I scripts/drip/drip_status.py data/drip.json  # launch null → WAVE=0 P
 - [ ] 도메인, 서치어드바이저·서치콘솔 소유확인 코드(`lib/site.ts` NAVER_VERIFY·GOOGLE_VERIFY 비어 있음), 사업자번호·대표자
 - [ ] 오픈일 → data/drip.json launch + schedule_posts.py
 - [ ] GitHub 저장소(deploy 브랜치용 remote)
+
+## h1 수식어·레이 구조 적용(2026-11-24)
+키워드 페이지 1,000쪽: h1 = 키워드 + 수식어(`.hero-sub`, 수식어 묶음별 3~4벌 해시, 키워드 속 지역명 반복 없음), 분류 줄 → 설명 → "{키워드} 핵심 요약"(결론 + 정보 칸 4) → 번호 절 6개(한 문단, 4개 h2에 키워드 전체) → 사진 3 → "{키워드} 자주 묻는 질문" → 관련 링크. 누수 유형 표·지점 소개 칸은 절 문단으로 녹이고 뺌. description 45~80자(키워드 — 같은 동네 다른 누수 키워드 · 담당 지점 · 상담 전화, 예전 M.desc 는 쓰지 않음). 조합기 `lib/compose.ts` 의 `ray()`·`desc80()`, 점검 `python -I scripts/ray_check.py out --group word,mod`.
+측정(빌드 결과): h1 중복 0 · description 59~80자 중복 0 · 키워드 든 h2 평균 7.0 · 절 문단 평균 237자(공백 제외) · 본문 평균 2,304자 · 내부링크 10~14 · 같은 주제(단어·수식어) 같은 문장 평균 11.1% 최대 29.4% · 같은 동네 평균 39.7% · 조사 의심 0. check_all: 중복·AI 티·화면·답 틀 통과. SEO 구조 미달 1건은 블로그 글 7편 title 60자 초과(키워드 페이지 아님), FAQ·Q&A 는 /qna/ 메뉴가 원래 없어 미달 — 둘 다 이번 작업 범위 밖.
+

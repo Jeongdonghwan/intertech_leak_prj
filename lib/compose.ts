@@ -3,9 +3,9 @@
 //   건물(아파트·상가·빌라·주택·야외)·누수 유형(층간·벽간·화장실·바닥·공용배관·노후배관·보일러), 하수도·변기 뚫음 등 설비,
 //   '최신장비와 최첨단 컴퓨터를 이용한 누수탐지'(소개 원문), 등록 사진의 가압 시험(압력계·컴프레서)·청음 탐지 장면.
 // 쓰지 않는 것: 가격·건수·리뷰 수·보장 표현(100%·완벽 해결).
-import { Page, Place, Gu, PLACES, GUS, seedOf, photosFor, Photo } from './data';
+import { Page, Place, Gu, PLACES, GUS, seedOf, photosFor, Photo, related } from './data';
 import { BRAND, HOURS, BRANCHES, Branch, PHONE } from './site';
-import { j } from './ko';
+import { j, josa } from './ko';
 
 const pick = <T,>(arr: T[], seed: string, salt: string): T => arr[seedOf(`${seed}::${salt}`) % arr.length];
 const pickN = <T,>(arr: T[], n: number, seed: string, salt: string): T[] => {
@@ -447,8 +447,7 @@ export function compose(p: Page): Composed {
   const answer = v.answer;
   let title = F(pick(m.title, s, 'title'));
   if (title.length > 60) title = `${p.kw} | ${BRAND}`;
-  let description = F(m.desc);
-  if (description.length > 158) description = description.slice(0, 155).replace(/\s\S*$/, '') + '…';
+  const description = desc80(p, placeName, b); // 2026-11-24: 45~80자 (예전 m.desc 는 쓰지 않음)
 
   const lead = pick([
     `${placeName} ${wl} 상담은 대표번호 ${PHONE}로 받고 ${b.name}이 방문합니다. ${HOURS}로 운영하며, 탐지·원인·공사·확인 순서로 진행합니다.`,
@@ -545,3 +544,131 @@ export function compose(p: Page): Composed {
 // 홈·허브에서 쓰는 단어 목록
 export const WORD_LABEL = (word: string) => W[word]?.label || word;
 export { TYPES };
+
+// description 45~80자(2026-11-24, composer-patterns §5-3): 키워드 → 이 페이지 관련 링크에 실제로 있는 다른 누수 키워드 2~3개 → 페이지 사실 하나 → 상담 전화.
+// 80자를 넘으면 사실 문장 → 관련 키워드 수 순서로 줄인다(글자 중간에서 자르지 않음).
+function desc80(p: Page, placeName: string, b: Branch): string {
+  const r = related(p);
+  const wl = W[p.word].label;
+  const rels: string[] = [];
+  for (const x of r.samePlace) { const l = W[x.word]?.label || x.word; if (l !== wl && !rels.includes(l)) rels.push(l); }
+  const facts = [
+    `${j(b.name, '이')} ${placeName} 현장을 방문합니다.`,
+    `24시간·연중무휴 접수.`,
+    `${b.name} 담당.`,
+  ];
+  const tail = `상담 ${PHONE}`;
+  for (let n = Math.min(3, rels.length); n >= 0; n--) {
+    const head = n ? `${p.kw} — ${rels.slice(0, n).join('·')}까지 함께 봅니다.` : `${p.kw} — 위치를 먼저 찾고 필요한 곳만 엽니다.`;
+    for (const f of facts) { const d = `${head} ${f} ${tail}`; if (d.length <= 80) return d; }
+  }
+  return `${p.kw} — ${b.name} 담당. ${tail}`;
+}
+
+// ---- 레이 모범 구조 (2026-11-24) — 분류 줄 → h1(키워드+수식어) → 설명 → 핵심 요약 → 번호 절 6개(한 문단) → FAQ → 관련 링크 ----
+// 절 본문은 문장 후보를 슬러그 해시 순서로 이어 붙여 한 문단(공백 제외 230~250자 목표)으로 만든다. 사실은 위 compose 재료(플레이스 소개 원문)만 쓴다.
+const shuffle = <T,>(arr: T[], s: string, salt: string) => arr.map((x, i) => [seedOf(`${s}::${salt}::${i}`), x] as [number, T]).sort((a, b) => a[0] - b[0]).map((x) => x[1]);
+const nsp = (t: string) => t.replace(/\s/g, '').length;
+const sents = (t: string) => t.split(/(?<=[.?!])\s+/).filter(Boolean);
+function para(first: string[], rest: string[], s: string, salt: string, keep = false, near = ''): string {
+  const out = [pick(first, s, `${salt}f`)];
+  let n = nsp(out[0]);
+  const order = keep ? rest : shuffle(rest, s, salt);
+  // 지명이 든 문장을 먼저 — 같은 주제 페이지끼리 같은 문장이 늘지 않게(지명 없는 일반 문장은 모자랄 때만)
+  const nmFirst = near ? [...order.filter((x) => x.includes(near)), ...order.filter((x) => !x.includes(near))] : order;
+  for (const x of nmFirst) {
+    if (n >= 225) break;
+    if (n + nsp(x) > 275 || out.includes(x)) continue;
+    out.push(x); n += nsp(x);
+  }
+  return out.join(' ');
+}
+const KW_AT = new Set([0, 1, 2, 5]); // 절 6개 중 4개 h2 에 키워드 전체
+type MG = 'price' | 'pick' | 'time' | 'base';
+const mg = (m: string): MG => (['비용', '가격', '견적'].includes(m) ? 'price' : ['잘하는곳', '추천', '전문', '업체'].includes(m) ? 'pick' : ['24시', '당일', '출장'].includes(m) ? 'time' : 'base');
+const CTX_NOUN: Record<Ctx, string> = { apt: '아파트', mixed: '빌라·상가', rural: '주택' };
+
+export function ray(p: Page) {
+  const c = compose(p);
+  const P = PLACES[p.place];
+  const G: Gu = GUS[p.gu];
+  const b = c.branch;
+  const w = W[p.word];
+  const s = p.slug;
+  const wl = w.label;
+  const nm = P.name;
+  const g = mg(p.mod);
+  const cn = CTX_NOUN[P.ctx];
+  const words = [nm, G.full, ...G.full.split(' '), ...nm.split(' ')].filter((x) => x && x.length >= 2);
+  const spot = shuffle(P.spots, s, 'h1spot').find((x) => !words.some((y) => x.includes(y)) && !p.kw.includes(x));
+  const head = (i: number, sub: string) => (KW_AT.has(i) ? `${p.kw}${i % 2 ? ' — ' : ': '}${sub}` : sub);
+  const typeRows = c.types.rows;
+
+  const h1sub = pick(({
+    price: [`탐지 범위와 여는 면적으로 정하는 금액`, `확인 뒤 범위별로 듣는 금액 기준`, `${cn} 배관 금액이 달라지는 이유`, ...(spot ? [`${spot} 주변 현장 금액 안내`] : [])],
+    pick: [`계통별 가압 시험부터 하는 곳 고르기`, `위치 먼저 찾고 필요한 곳만 여는 업체`, `${cn} 누수 업체 고르는 기준`, ...(spot ? [`${spot} 주변 업체 비교 기준`] : [])],
+    time: [`${b.name} 24시간·연중무휴 접수`, `${b.name} 방문 시간 맞추기`, `${cn} 누수 급할 때 연락 순서`, ...(spot ? [`${spot} 주변 방문 일정 안내`] : [])],
+    base: [`탐지·원인·공사·확인 네 단계`, `${typeRows[0].name}부터 가리는 순서`, `${cn} 배관에서 새는 자리 찾기`, ...(spot ? [`${spot} 주변 현장 확인 순서`] : [])],
+  } as Record<MG, string[]>)[g], s, 'h1sub');
+
+  const summary = [c.answer, `${j(nm, '은')} ${b.name} 담당이고 대표번호 ${PHONE}로 ${HOURS} 접수합니다.`, pick([
+    `${nm} 현장도 위치를 먼저 확인한 뒤 필요한 곳만 열고, 공사 여부와 범위는 설명을 들은 뒤 정하시면 됩니다.`,
+    `${nm} 현장도 탐지 → 원인 → 공사 → 확인 순서로 진행하고, 확인한 근거를 그대로 말씀드립니다.`,
+  ], s, 'sum')].join(' ');
+
+  const S1 = {
+    sub: pick([`젖은 자리와 새는 자리`, `원인을 나누는 방법`, `상담에서 먼저 가리는 것`], s, 's1'),
+    p: para([`${nm}에서 말하는 ${j(wl, '은')} ${w.focus}입니다.`, `${nm} 현장의 ${j(wl, '은')} ${w.focus}입니다.`],
+      [sents(c.service.paras[seedOf(s + '::sv') % c.service.paras.length])[0], `${nm} ${cn} 현장도 얼룩만 보고 위치를 정하지 않고 계량기와 보일러 압력부터 확인합니다.`,
+        `${nm} ${wl} 상담은 언제부터 젖었는지, 물을 쓸 때만 젖는지, 보일러를 켤 때 심해지는지를 여쭙는 데서 시작합니다.`,
+        `비 온 다음 날에만 얼룩이 커진다면 ${nm} 현장도 배관보다 외벽·창틀·옥상 쪽을 먼저 봅니다.`], s, 's1p', false, nm),
+  };
+  const S2 = {
+    sub: pick([`${nm} 건물과 배관 사정`, `동네 건물마다 다른 확인 순서`, `${cn} 구조에서 먼저 볼 곳`], s, 's2'),
+    p: para([c.region.paras[0]], [...c.region.paras.slice(P.unit === '구' || P.unit === '시·군' ? 1 : 2), ...P.spots.slice(0, 2).map((x, i) => i ? `${x} 근처 ${cn} 현장도 같은 순서로 계통을 나눠 시험합니다.` : `${nm}에서는 ${x} 주변 ${wl} 상담도 같은 순서로 받습니다.`), `${nm} ${cn} 현장은 ${BUILDING[P.ctx].kinds} 구조에 맞춰 시험 순서를 정합니다.`], s, 's2p', false, nm),
+  };
+  const sg = c.signs.items;
+  const S3 = {
+    sub: pick([`이런 증상이면 연락하세요`, `먼저 보이는 신호`, `${cn}에서 의심할 때`], s, 's3'),
+    p: para([`${nm} ${cn}에서 가장 흔한 신호는 '${sg[0]}'입니다.`, `${nm}에서 ${wl} 상담이 시작되는 첫 신호는 대개 '${sg[0]}'입니다.`],
+      [`${nm}에서는 '${sg[1]}', '${sg[2]}' 같은 증상도 자주 듣습니다.`, `'${sg[3]}' 같은 경우도 ${nm} 건물 어딘가에서 물이 새고 있다는 신호입니다.`,
+        `${nm} 현장도 물을 다 잠근 뒤 수도 계량기 별침이 도는지 보면 압력이 걸린 배관인지 먼저 가릴 수 있습니다.`,
+        `젖은 자리와 계량기 사진이 있으면 ${nm} ${wl} 통화가 짧아집니다.`,
+        `메인 밸브를 잠가 두고 연락 주시면 ${nm} 현장 피해가 커지는 것을 줄일 수 있습니다.`], s, 's3p', true),
+  };
+  const S4 = {
+    sub: pick([`가까운 누수 유형`, `유형별로 보는 곳`, `${wl}과 이어지는 유형`.replace(`${wl}과`, j(wl, '과'))], s, 's4'),
+    p: para([`${nm}처럼 ${BUILDING[P.ctx].kinds}가 많은 곳에서 ${j(wl, '과')} 이어지는 유형은 ${typeRows.map((t) => t.name).join('·')}입니다.`],
+      typeRows.map((t) => `${nm} ${t.name}${josa(t.name, '은')} ${t.where} 새는 경우가 많아, ${t.check}부터 합니다.`.replace(/으로 새는/, '으로 새는')), s, 's4p', true),
+  };
+  const ST = ['탐지 단계에서는', '원인 단계에서는', '공사 단계에서는', '확인 단계에서는'];
+  const S5 = {
+    sub: pick([`진행 순서`, `탐지에서 확인까지`, `네 단계로 보는 순서`], s, 's5'),
+    p: para([`${nm} ${wl} 현장은 탐지·원인·공사·확인 네 단계로 진행합니다.`],
+      c.steps.map((x, i) => `${ST[i]} ${i % 2 ? `${nm}에서도 ` : `${nm} 현장도 `}${x.text}.`).concat([`단계마다 확인한 내용을 ${nm} 현장에서 그대로 설명드리고, 공사 여부는 그 설명을 들은 뒤 정하시면 됩니다.`]), s, 's5p', true),
+  };
+  const mp = c.mod.paras.flatMap(sents).filter((x) => !/아래 표|표의|아래 칸|아래 목록/.test(x)); // 표는 화면에서 뺐으므로 표를 가리키는 문장도 뺀다
+  const rows = (c.mod.table || []).slice(0, 2);
+  const S6 = {
+    sub: ({
+      price: pick([`${j(p.mod, '이')} 정해지는 기준`, `금액이 달라지는 이유`], s, 's6'),
+      pick: pick([`업체 고르는 기준`, `${p.mod} 비교할 때 물어볼 것`], s, 's6'),
+      time: pick([`연락 전 확인할 것`, `${p.mod} 문의, 이렇게 진행합니다`], s, 's6'),
+      base: pick([`상담 받는 방법`, `접수부터 확인까지`], s, 's6'),
+    } as Record<MG, string>)[g],
+    p: para([mp[0]], [ ...(rows.length ? [`${nm} 현장 기준으로 ${rows.map(([k, x]) => `${j(k, '은')} '${x}'`).join(', ')}에 따라 달라집니다.`] : []),
+      `${j(nm, '은')} ${b.name}이 맡고, 소개 원문 기준 담당 범위는 '${b.area}'입니다.`.replace(`${b.name}이`, j(b.name, '이')),
+      `${nm} ${wl} 상담은 대표번호 ${PHONE}로 받고, ${HOURS} 접수합니다.`,
+      `계량기 사진과 젖은 자리 사진이 있으면 ${nm} 현장 통화가 짧아집니다.`,
+      `${nm} 현장에서 확인한 위치와 원인, 작업 내용은 정리해 드릴 수 있습니다.`,
+      `영업 중인 ${nm} 상가는 영업시간을 피해 시험 일정을 잡을 수 있습니다.`,
+      `계량기 확인과 가압 시험은 실내 출입이 필요해, ${nm} 현장도 거주자나 관리인이 있을 때 예약으로 시간을 맞춥니다.`], s, 's6p', false, nm),
+  };
+  const sections = [S1, S2, S3, S4, S5, S6].map((x, i) => ({ h: head(i, x.sub), p: x.p }));
+  // FAQ: 단어별 2개 중 1개 + 수식어 FAQ + 지역 FAQ + 일반 1개 (같은 단어 페이지끼리 같은 답이 몰리지 않게)
+  const F = (x: string) => fill(x, { kw: p.kw, w: wl, place: nm, branch: b.name, brand: BRAND });
+  const mf = (M[p.mod] || M['']).faq.map((f) => ({ q: F(f.q), a: F(f.a) }));
+  const local = [{ q: `${nm}도 방문하나요?`, a: `${j(nm, '은')} ${b.name} 담당 지역이라, 주소와 증상을 알려 주시면 ${nm} 방문 가능한 시간을 통화에서 바로 안내드립니다.` }];
+  const faq = [pick(w.faq, s, 'rf1'), ...local, pick(p.mod ? mf : GENERAL_FAQ, s, 'gf')].map((f) => ({ q: F(f.q), a: F(f.a) }));
+  return { c, cat: `${G.full} · ${wl}`, h1sub, lead: c.lead, summary, facts: c.summary.slice(0, 4), sections, faq };
+}
