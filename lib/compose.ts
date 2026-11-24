@@ -588,6 +588,18 @@ type MG = 'price' | 'pick' | 'time' | 'base';
 const mg = (m: string): MG => (['비용', '가격', '견적'].includes(m) ? 'price' : ['잘하는곳', '추천', '전문', '업체'].includes(m) ? 'pick' : ['24시', '당일', '출장'].includes(m) ? 'time' : 'base');
 const CTX_NOUN: Record<Ctx, string> = { apt: '아파트', mixed: '빌라·상가', rural: '주택' };
 
+// title·h1 공용 수식어(2026-11-24): "키워드 수식어" 가 40자를 넘으면 더 짧은 벌을 고르고, 그래도 넘으면 수식어를 낱말 단위로 줄인다.
+function fitSub(kw: string, arr: string[], s: string): string {
+  const ok = (x: string) => kw.length + 1 + x.length <= 40;
+  const first = pick(arr, s, 'h1sub');
+  if (ok(first)) return first;
+  const fits = arr.filter(ok);
+  if (fits.length) return pick(fits, s, 'h1sub2');
+  const w = [...arr].sort((a, b) => a.length - b.length)[0].split(' ');
+  while (w.length > 1 && !ok(w.join(' '))) w.pop();
+  return w.join(' ');
+}
+
 export function ray(p: Page) {
   const c = compose(p);
   const P = PLACES[p.place];
@@ -604,12 +616,13 @@ export function ray(p: Page) {
   const head = (i: number, sub: string) => (KW_AT.has(i) ? `${p.kw}${i % 2 ? ' — ' : ': '}${sub}` : sub);
   const typeRows = c.types.rows;
 
-  const h1sub = pick(({
+  const h1sub = fitSub(p.kw, ({
     price: [`탐지 범위와 여는 면적으로 정하는 금액`, `확인 뒤 범위별로 듣는 금액 기준`, `${cn} 배관 금액이 달라지는 이유`, ...(spot ? [`${spot} 주변 현장 금액 안내`] : [])],
     pick: [`계통별 가압 시험부터 하는 곳 고르기`, `위치 먼저 찾고 필요한 곳만 여는 업체`, `${cn} 누수 업체 고르는 기준`, ...(spot ? [`${spot} 주변 업체 비교 기준`] : [])],
     time: [`${b.name} 24시간·연중무휴 접수`, `${b.name} 방문 시간 맞추기`, `${cn} 누수 급할 때 연락 순서`, ...(spot ? [`${spot} 주변 방문 일정 안내`] : [])],
     base: [`탐지·원인·공사·확인 네 단계`, `${typeRows[0].name}부터 가리는 순서`, `${cn} 배관에서 새는 자리 찾기`, ...(spot ? [`${spot} 주변 현장 확인 순서`] : [])],
-  } as Record<MG, string[]>)[g], s, 'h1sub');
+  } as Record<MG, string[]>)[g], s);
+  const title = `${p.kw} ${h1sub} | ${BRAND}`; // h1 과 같은 글자 + 상호 한 번
 
   const summary = [c.answer, `${j(nm, '은')} ${b.name} 담당이고 대표번호 ${PHONE}로 ${HOURS} 접수합니다.`, pick([
     `${nm} 현장도 위치를 먼저 확인한 뒤 필요한 곳만 열고, 공사 여부와 범위는 설명을 들은 뒤 정하시면 됩니다.`,
@@ -670,5 +683,5 @@ export function ray(p: Page) {
   const mf = (M[p.mod] || M['']).faq.map((f) => ({ q: F(f.q), a: F(f.a) }));
   const local = [{ q: `${nm}도 방문하나요?`, a: `${j(nm, '은')} ${b.name} 담당 지역이라, 주소와 증상을 알려 주시면 ${nm} 방문 가능한 시간을 통화에서 바로 안내드립니다.` }];
   const faq = [pick(w.faq, s, 'rf1'), ...local, pick(p.mod ? mf : GENERAL_FAQ, s, 'gf')].map((f) => ({ q: F(f.q), a: F(f.a) }));
-  return { c, cat: `${G.full} · ${wl}`, h1sub, lead: c.lead, summary, facts: c.summary.slice(0, 4), sections, faq };
+  return { c, title, cat: `${G.full} · ${wl}`, h1sub, lead: c.lead, summary, facts: c.summary.slice(0, 4), sections, faq };
 }
