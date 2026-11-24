@@ -622,7 +622,8 @@ export function ray(p: Page) {
     time: [`${b.name} 24시간·연중무휴 접수`, `${b.name} 방문 시간 맞추기`, `${cn} 누수 급할 때 연락 순서`, ...(spot ? [`${spot} 주변 방문 일정 안내`] : [])],
     base: [`탐지·원인·공사·확인 네 단계`, `${typeRows[0].name}부터 가리는 순서`, `${cn} 배관에서 새는 자리 찾기`, ...(spot ? [`${spot} 주변 현장 확인 순서`] : [])],
   } as Record<MG, string[]>)[g], s);
-  const title = `${p.kw} ${h1sub} | ${BRAND}`; // h1 과 같은 글자 + 상호 한 번
+  const front = `${p.kw} ${h1sub}`; // h1 과 같은 글자
+  const title = `${front} | ${BRAND}`.length <= 40 ? `${front} | ${BRAND}` : front; // 네이버 권장 40자: 넘으면 상호를 뺀다(og:site_name 에 상호가 있다)
 
   const summary = [c.answer, `${j(nm, '은')} ${b.name} 담당이고 대표번호 ${PHONE}로 ${HOURS} 접수합니다.`, pick([
     `${nm} 현장도 위치를 먼저 확인한 뒤 필요한 곳만 열고, 공사 여부와 범위는 설명을 들은 뒤 정하시면 됩니다.`,
